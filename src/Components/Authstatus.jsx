@@ -1,19 +1,19 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState } from 'react';
 
+// Context create karo
+export const AuthContext = createContext();
 
-export const contextApi = createContext()
-const Authstatus = ({children}) => {
-    
-const [userName , setUserName]=useState("")
-const [isAuthenticated , setIsAuthentcated] = useState(false)
-    
+const AuthStatus = ({ children }) => {
+  const [userName, setUserName] = useState(localStorage.getItem("userName") || "");
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("isAuthenticated") === "true" // ✅ convert string to boolean
+  );
+
   return (
-    <div>
-      <contextApi.Provider value={{setUserName ,userName,setIsAuthentcated,isAuthenticated}}>
-        {children}
-      </contextApi.Provider>
-    </div>
-  )
-}
+    <AuthContext.Provider value={{ userName, setUserName, isAuthenticated, setIsAuthenticated }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-export default Authstatus
+export default AuthStatus;

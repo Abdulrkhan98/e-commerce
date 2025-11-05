@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { createContext, useState } from 'react';
 
 // Context create karo
@@ -17,3 +18,24 @@ const AuthStatus = ({ children }) => {
 };
 
 export default AuthStatus;
+=======
+import React, { createContext, useState } from 'react'
+
+
+export const contextApi = createContext()
+const Authstatus = ({children}) => {
+    
+const [userName , setUserName]=useState(localStorage.getItem("userName") || "")
+const [isAuthenticated , setIsAuthentcated] = useState(localStorage.getItem("isAuthenticated")|| false)
+    
+  return (
+    <div>
+      <contextApi.Provider value={{setUserName ,userName,setIsAuthentcated,isAuthenticated}}>
+        {children}
+      </contextApi.Provider>
+    </div>
+  )
+}
+
+export default Authstatus
+>>>>>>> upstream/main

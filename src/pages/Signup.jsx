@@ -7,10 +7,16 @@ import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const navigate = useNavigate()
+<<<<<<< HEAD
   const objectName = useContext(contextApi)
   const [icon, setIcon] = useState(false);
   const [contact, setContact] = useState({
 
+=======
+  const {setUserName,isAuthenticated,setIsAuthentcated} = useContext(contextApi)
+  const [icon, setIcon] = useState(false);
+  const [contact, setContact] = useState({
+>>>>>>> upstream/main
     name: "",
     password: "",
   });
@@ -33,7 +39,15 @@ const Signup = () => {
           password: contact.password.toLowerCase(),
         }),
       });
+<<<<<<< HEAD
       objectName.setUserName(contact.name)
+=======
+
+      setUserName(contact.name)
+      setIsAuthentcated(true)
+      localStorage.setItem("isAuthenticated", true)
+      localStorage.setItem("userName", contact.name)
+>>>>>>> upstream/main
       navigate("/")
     }
   };

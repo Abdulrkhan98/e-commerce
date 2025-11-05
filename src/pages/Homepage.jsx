@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
+=======
+import React, { useEffect, useRef, useState } from 'react';
+>>>>>>> upstream/main
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import Navbar from '../Components/Navbar';
 import Button from '../Components/Button'
 import Section from '../Components/Section'
 
 const Homepage = () => {
+<<<<<<< HEAD
+=======
+  const selectedCategories = useRef([])
+>>>>>>> upstream/main
   const [slide, setSlide] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true); 
@@ -14,10 +22,25 @@ const Homepage = () => {
       setLoading(true);
       const res = await fetch("https://e-commerce-backened-4fih.onrender.com/products");
       const data = await res.json();
+<<<<<<< HEAD
 
       const categories = ["men's clothing", "women's clothing", "jewelery", "electronics"];
       const selected = categories.map(cat => data.find(item => item.category === cat));
       setSlide(selected);
+=======
+      const sliderData = data.products
+      const filteredCategory = sliderData.filter(item => {
+        if(selectedCategories.current.includes(item.category)){
+          return false
+        }else{
+          selectedCategories.current.push(item.category)
+          return true
+        }
+        
+      } ) 
+      setSlide(filteredCategory)
+      // console.log("filteredCategory",filteredCategory)
+>>>>>>> upstream/main
     } catch (error) {
       console.log("Error fetching slides:", error);
     } finally {
@@ -66,7 +89,11 @@ const Homepage = () => {
             
               <div className="w-full h-full flex flex-col items-center justify-center bg-gray-900">
                 <img
+<<<<<<< HEAD
                   src={slide[currentIndex].image}
+=======
+                  src={slide[currentIndex].thumbnail}
+>>>>>>> upstream/main
                   alt={slide[currentIndex].title}
                   className="max-h-full max-w-full object-contain rounded-2xl drop-shadow-lg"
                 />

@@ -6,50 +6,50 @@ import { contextApi } from '../Components/Authstatus';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-  const navigate = useNavigate()
-<<<<<<< HEAD
-  const objectName = useContext(contextApi)
-  const [icon, setIcon] = useState(false);
-  const [contact, setContact] = useState({
+  const navigate = useNavigate();
+  const { setUserName, setIsAuthentcated } = useContext(contextApi);
 
-=======
-  const {setUserName,isAuthenticated,setIsAuthentcated} = useContext(contextApi)
   const [icon, setIcon] = useState(false);
   const [contact, setContact] = useState({
->>>>>>> upstream/main
     name: "",
     password: "",
   });
 
+  // ✅ Ye function yahan likho, state ke baad
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (contact.name.trim() && contact.password.trim()) {
+      try {
+        const res = await fetch("https://e-commerce-backened-4fih.onrender.com/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: contact.name,
+            password: contact.password,
+          }),
+        });
+
+        const data = await res.json();
+        console.log("Response status:", res.status);
+        console.log("Response data:", data);
+
+        if (!res.ok) throw new Error(data.message || "Signup failed");
+
+        setUserName(contact.name);
+        setIsAuthentcated(true);
+        localStorage.setItem("isAuthenticated", true);
+        localStorage.setItem("userName", contact.name);
+        navigate("/");
+      } catch (error) {
+        console.error("Signup error:", error);
+        alert(error.message);
+      }
+    }
+  };
+
   const handleinput = (e) => {
     const { name, value } = e.target;
     setContact((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-   console.log("ghjk");
-   
-    e.preventDefault();
-    if (contact.name.trim() && contact.password.trim()) {
-      const res = await fetch("https://e-commerce-backened-4fih.onrender.com/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: contact.name.toLowerCase(),
-          password: contact.password.toLowerCase(),
-        }),
-      });
-<<<<<<< HEAD
-      objectName.setUserName(contact.name)
-=======
-
-      setUserName(contact.name)
-      setIsAuthentcated(true)
-      localStorage.setItem("isAuthenticated", true)
-      localStorage.setItem("userName", contact.name)
->>>>>>> upstream/main
-      navigate("/")
-    }
   };
 
   return (
@@ -58,6 +58,7 @@ const Signup = () => {
         <p className='mt-2 text-gray-400'>Please enter your details</p>
         <h1 className='mt-3 text-2xl font-bold'>Create Account</h1>
 
+        {/* form me onSubmit={handleSubmit} */}
         <form onSubmit={handleSubmit}>
           <div className='flex flex-col justify-center items-center gap-5 mt-5'>
             <input

@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
 import { FaGoogle } from "react-icons/fa6";
-<<<<<<< HEAD
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
-=======
-import { Link ,useNavigate } from 'react-router-dom';
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-
-
-const Login = () => {
-  const navigate = useNavigate()
->>>>>>> upstream/main
+  const navigate = useNavigate();
   const [icon, setIcon] = useState(false);
   const [login, setLogin] = useState({
     name: "",
@@ -33,11 +25,8 @@ const Login = () => {
         body: JSON.stringify({ username: login.name, password: login.password }),
       });
       console.log(res.status);
-<<<<<<< HEAD
-=======
-      navigate("/")
-      localStorage.setItem("userName",login.name)
->>>>>>> upstream/main
+      navigate("/");
+      localStorage.setItem("userName", login.name);
     }
   };
 
@@ -95,11 +84,7 @@ const Login = () => {
             <button className='flex items-center gap-2 px-8 py-3 border border-gray-400 rounded-xl'>
               <FaGoogle /> Sign in with Google
             </button>
-<<<<<<< HEAD
             <Link to={"/signup"}>
-=======
-            <Link to={"/"}>
->>>>>>> upstream/main
               <p className='text-gray-400'>
                 Don’t have an account? <span className='text-blue-600 underline'>Sign up</span>
               </p>

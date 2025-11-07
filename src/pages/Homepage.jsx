@@ -1,18 +1,11 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react';
-=======
 import React, { useEffect, useRef, useState } from 'react';
->>>>>>> upstream/main
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import Navbar from '../Components/Navbar';
-import Button from '../Components/Button'
-import Section from '../Components/Section'
+import Button from '../Components/Button';
+import Section from '../Components/Section';
 
 const Homepage = () => {
-<<<<<<< HEAD
-=======
-  const selectedCategories = useRef([])
->>>>>>> upstream/main
+  const selectedCategories = useRef([]);
   const [slide, setSlide] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true); 
@@ -22,25 +15,17 @@ const Homepage = () => {
       setLoading(true);
       const res = await fetch("https://e-commerce-backened-4fih.onrender.com/products");
       const data = await res.json();
-<<<<<<< HEAD
 
-      const categories = ["men's clothing", "women's clothing", "jewelery", "electronics"];
-      const selected = categories.map(cat => data.find(item => item.category === cat));
-      setSlide(selected);
-=======
-      const sliderData = data.products
+      const sliderData = data.products;
       const filteredCategory = sliderData.filter(item => {
         if(selectedCategories.current.includes(item.category)){
-          return false
-        }else{
-          selectedCategories.current.push(item.category)
-          return true
+          return false;
+        } else {
+          selectedCategories.current.push(item.category);
+          return true;
         }
-        
-      } ) 
-      setSlide(filteredCategory)
-      // console.log("filteredCategory",filteredCategory)
->>>>>>> upstream/main
+      });
+      setSlide(filteredCategory);
     } catch (error) {
       console.log("Error fetching slides:", error);
     } finally {
@@ -52,7 +37,6 @@ const Homepage = () => {
     slideimg();
   }, []);
 
- 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === slide.length - 1 ? 0 : prevIndex + 1
@@ -70,7 +54,6 @@ const Homepage = () => {
       <Navbar />
 
       <section className="flex flex-col items-center justify-center py-10 px-5 bg-gradient-to-b from-gray-900 via-gray-800 to-black">
-      
         {loading ? (
           <div className="relative w-full md:w-[80%] lg:w-[70%] h-[400px] md:h-[550px] rounded-3xl bg-gray-800 animate-pulse flex items-center justify-center shadow-2xl">
             <div className="text-gray-400 text-xl md:text-2xl">Loading...</div>
@@ -78,7 +61,6 @@ const Homepage = () => {
         ) : (
           slide.length > 0 && (
             <div className="relative w-full md:w-[80%] lg:w-[70%] h-[400px] md:h-[550px] flex items-center justify-center rounded-3xl shadow-2xl overflow-hidden">
-
               <button
                 onClick={handlePrev}
                 className="absolute left-3 md:left-6 bg-black/60 text-white p-3 md:p-4 rounded-full hover:bg-black transition z-10"
@@ -86,14 +68,9 @@ const Homepage = () => {
                 <FaArrowLeft size={20} />
               </button>
 
-            
               <div className="w-full h-full flex flex-col items-center justify-center bg-gray-900">
                 <img
-<<<<<<< HEAD
-                  src={slide[currentIndex].image}
-=======
                   src={slide[currentIndex].thumbnail}
->>>>>>> upstream/main
                   alt={slide[currentIndex].title}
                   className="max-h-full max-w-full object-contain rounded-2xl drop-shadow-lg"
                 />
